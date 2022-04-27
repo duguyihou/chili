@@ -1,13 +1,12 @@
 import { createHttpLink } from '@apollo/client'
 import { setContext } from '@apollo/client/link/context'
-import { envConfig } from '../../utils/constants'
 
 const authLink = setContext((_, { headers }) => {
-
+  const token = process.env.NEXT_PUBLIC_APOLLO_KEY
   return {
     headers: {
       ...headers,
-      'Authorization': envConfig.apolloKey ? `Bearer ${envConfig.apolloKey}` : null,
+      'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/json',
       Accept: 'application/json',
     },
@@ -15,7 +14,7 @@ const authLink = setContext((_, { headers }) => {
 })
 
 const createdHttpLink = createHttpLink({
-  uri: envConfig.apolloUri || '',
+  uri: process.env.NEXT_PUBLIC_APOLLO_URI || ''
 })
 
 const httpLink = authLink.concat(createdHttpLink)

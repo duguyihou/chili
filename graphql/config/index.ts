@@ -11,7 +11,7 @@ export const client: ApolloClient<NormalizedCacheObject> = new ApolloClient(
     // Note: httpLink is terminating so must be last, while retry & error wrap
     // the links to their right. State & context links should happen before (to
     // the left of) restLink.
-    connectToDevTools: process.env.NODE_ENV !== 'production',
+    connectToDevTools: process.env.NEXT_PUBLIC_NODE_ENV !== 'production',
     cache: localCache,
     assumeImmutableResults: true,
     resolvers: localResolvers,
